@@ -11,7 +11,7 @@ import ru.muravin.springLibrary.models.Person;
 import javax.validation.Valid;
 
 /**
- * @author Neil Alishev
+ * @author
  */
 @Controller
 @RequestMapping("/people")

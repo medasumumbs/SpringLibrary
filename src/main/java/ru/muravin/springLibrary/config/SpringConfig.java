@@ -13,10 +13,10 @@ import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 
 /**
- * @author Neil Alishev
+ * @author
  */
 @Configuration
-@ComponentScan("ru.alishev.springcourse")
+@ComponentScan("ru.muravin.springLibrary")
 @EnableWebMvc
 public class SpringConfig implements WebMvcConfigurer {
 
