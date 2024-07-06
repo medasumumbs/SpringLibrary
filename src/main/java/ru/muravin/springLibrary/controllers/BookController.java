@@ -37,6 +37,8 @@ public class BookController {
         model.addAttribute("book", book);
         if (book.getPerson_id() == null) {
             model.addAttribute("people", personDAO.index());
+        } else {
+            model.addAttribute("person", null);
         }
         return "books/show";
     }
@@ -69,6 +71,20 @@ public class BookController {
             return "books/edit";
 
         bookDAO.update(id, book);
+        return "redirect:/books";
+    }
+    @PatchMapping("/{id}/setPerson")
+    public String setPerson(@ModelAttribute("book") @Valid Book book, BindingResult bindingResult,
+                         @ModelAttribute("person") Person person,
+                         @PathVariable("id") int id) {
+        bookDAO.setPerson(id, person.getId());
+        return "redirect:/books";
+    }
+    @PatchMapping("/{id}/free")
+    public String setPersonNull(@ModelAttribute("book") @Valid Book book, BindingResult bindingResult,
+                            @ModelAttribute("person") Person person,
+                            @PathVariable("id") int id) {
+        bookDAO.setPerson(id, null);
         return "redirect:/books";
     }
 
