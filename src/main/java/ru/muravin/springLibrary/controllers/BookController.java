@@ -6,17 +6,22 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.muravin.springLibrary.dao.BookDAO;
+import ru.muravin.springLibrary.dao.PersonDAO;
 import ru.muravin.springLibrary.models.Book;
+import ru.muravin.springLibrary.models.Person;
 
 import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/books")
 public class BookController {
+    @Autowired
+    private final PersonDAO personDAO;
     private final BookDAO bookDAO;
 
     @Autowired
-    public BookController(BookDAO bookDAO) {
+    public BookController(PersonDAO personDAO, BookDAO bookDAO) {
+        this.personDAO = personDAO;
         this.bookDAO = bookDAO;
     }
 
@@ -27,8 +32,12 @@ public class BookController {
     }
 
     @GetMapping("/{id}")
-    public String show(@PathVariable("id") int id, Model model) {
-        model.addAttribute("book", bookDAO.show(id));
+    public String show(@PathVariable("id") int id, Model model, @ModelAttribute("person") Person person) {
+        Book book = bookDAO.show(id);
+        model.addAttribute("book", book);
+        if (book.getPerson_id() == null) {
+            model.addAttribute("people", personDAO.index());
+        }
         return "books/show";
     }
 
