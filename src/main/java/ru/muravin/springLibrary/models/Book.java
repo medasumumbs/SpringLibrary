@@ -3,6 +3,10 @@ package ru.muravin.springLibrary.models;
 import javax.validation.constraints.*;
 
 public class Book {
+
+    private Person person;
+
+    private Integer person_id;
     private int id;
 
     @NotEmpty(message = "Название не должно быть пустым")
@@ -20,10 +24,12 @@ public class Book {
 
     }
 
-    public Book(String name, int yearOfCreation, String authorName) {
+    public Book(String name, int yearOfCreation, String authorName, Integer personId, Person person) {
         this.name = name;
         this.yearOfCreation = yearOfCreation;
         this.authorName = authorName;
+        this.person_id = personId;
+        this.person = person;
     }
 
     public String getName() {
@@ -56,5 +62,21 @@ public class Book {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
+
+    public Integer getPerson_id() {
+        return person_id;
+    }
+
+    public void setPerson_id(Integer person_id) {
+        this.person_id = person_id;
     }
 }

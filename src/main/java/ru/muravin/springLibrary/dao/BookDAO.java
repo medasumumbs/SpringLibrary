@@ -12,10 +12,13 @@ import java.util.List;
 @Component
 public class BookDAO {
     @Autowired
+    private final PersonDAO personDAO;
+    @Autowired
     private final JdbcTemplate jdbcTemplate;
     private static Connection connection;
 
-    public BookDAO(JdbcTemplate jdbcTemplate) {
+    public BookDAO(PersonDAO personDAO, JdbcTemplate jdbcTemplate) {
+        this.personDAO = personDAO;
         this.jdbcTemplate = jdbcTemplate;
     }
 
@@ -32,9 +35,13 @@ public class BookDAO {
     }
 
     public Book show(int id) {
-        return jdbcTemplate.query("select * from Book where id = ?",
+        Book book = jdbcTemplate.query("select * from Book where id = ?",
                 new Object[]{id},
                 new BeanPropertyRowMapper<>(Book.class)).stream().findAny().orElse(null);
+        if (book.getPerson_id() != null) {
+            book.setPerson(personDAO.show(book.getPerson_id()));
+        }
+        return book;
     }
 
     public void save(Book book) {
