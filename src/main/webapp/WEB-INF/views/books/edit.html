@@ -6,20 +6,20 @@
 </head>
 <body>
 
-<form th:method="PATCH" th:action="@{/people/{id}(id=${person.getId()})}" th:object="${person}">
-    <label for="name">Введите ФИО: </label>
+<form th:method="PATCH" th:action="@{/books/{id}(id=${book.getId()})}" th:object="${book}">
+    <label for="name">Введите название книги: </label>
     <input type="text" th:field="*{name}" id="name"/>
     <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</div>
     <br/>
-    <label for="yearOfBirth">Введите год рождения: </label>
-    <input type="text" th:field="*{yearOfBirth}" id="yearOfBirth"/>
-    <div style="color:red" th:if="${#fields.hasErrors('yearOfBirth')}" th:errors="*{yearOfBirth}">YearOfBirth Error</div>
+    <label for="yearOfCreation">Введите год создания книги: </label>
+    <input type="text" th:field="*{yearOfCreation}" id="yearOfCreation"/>
+    <div style="color:red" th:if="${#fields.hasErrors('yearOfCreation')}" th:errors="*{yearOfCreation}">YearOfCreation Error</div>
     <br/>
-    <label for="email">Введите email: </label>
-    <input type="text" th:field="*{email}" id="email"/>
-    <div style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</div>
+    <label for="authorName">Введите имя автора: </label>
+    <input type="text" th:field="*{authorName}" id="authorName"/>
+    <div style="color:red" th:if="${#fields.hasErrors('authorName')}" th:errors="*{authorName}">AuthorName Error</div>
     <br/>
-    <input type="submit" value="Обновить!"/>
+    <input type="submit" value="Редактировать!"/>
 </form>
 
 </body>

@@ -23,6 +23,14 @@ public class BookDAO {
         return jdbcTemplate.query("select * from Book", new BeanPropertyRowMapper<>(Book.class));
     }
 
+    public List<Book> selectByPersonId(int id) {
+        return jdbcTemplate.query(
+                "select * from Book where person_id = ?",
+                new Object[]{id},
+                new BeanPropertyRowMapper<>(Book.class)
+        );
+    }
+
     public Book show(int id) {
         return jdbcTemplate.query("select * from Book where id = ?",
                 new Object[]{id},
