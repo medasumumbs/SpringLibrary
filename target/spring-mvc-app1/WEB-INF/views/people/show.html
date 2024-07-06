@@ -5,9 +5,9 @@
     <title>Описание человека</title>
 </head>
 <body>
-<p th:text="${person.getName() + ', ' + person.getAge()}">VALUE</p>
+<p th:text="${person.getName() + ', ' + person.getYearOfBirth()}">VALUE</p>
 <p th:text="${'Email: ' + person.getEmail()}">VALUE</p>
-<p th:text="${person.getId()}">VALUE</p>
+<!--<p th:text="${person.getId()}">VALUE</p>-->
 
 <a th:href="@{/people/{id}/edit(id=${person.getId()})}">Редактировать</a>
 

@@ -1,9 +1,6 @@
 package ru.muravin.springLibrary.models;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 /**
  *
@@ -11,25 +8,26 @@ import javax.validation.constraints.Size;
 public class Person {
     private int id;
 
-    @NotEmpty(message = "Name should not be empty")
-    @Size(min = 2, max = 30, message = "Name should be between 2 and 30 characters")
+    @NotEmpty(message = "ФИО не должно быть пустым")
+    @Size(min = 2, max = 30, message = "ФИО может занимать от 2 до 30 символов")
     private String name;
 
-    @Min(value = 0, message = "Age should be greater than 0")
-    private int age;
+    @NotNull(message = "Год рождения не должен быть пустым")
+    @Min(value = 1890, message = "Некорректно указан год рождения")
+    private int yearOfBirth;
 
-    @NotEmpty(message = "Email should not be empty")
-    @Email(message = "Email should be valid")
+    @NotEmpty(message = "Email не может быть пустым")
+    @Email(message = "Email должен быть валидным")
     private String email;
 
     public Person() {
 
     }
 
-    public Person(int id, String name, int age, String email) {
+    public Person(int id, String name, int yearOfBirth, String email) {
         this.id = id;
         this.name = name;
-        this.age = age;
+        this.yearOfBirth = yearOfBirth;
         this.email = email;
     }
 
@@ -49,13 +47,7 @@ public class Person {
         this.name = name;
     }
 
-    public int getAge() {
-        return age;
-    }
 
-    public void setAge(int age) {
-        this.age = age;
-    }
 
     public String getEmail() {
         return email;
@@ -63,5 +55,13 @@ public class Person {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public int getYearOfBirth() {
+        return yearOfBirth;
+    }
+
+    public void setYearOfBirth(int yearOfBirth) {
+        this.yearOfBirth = yearOfBirth;
     }
 }

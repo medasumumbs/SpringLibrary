@@ -7,13 +7,13 @@
 <body>
 
 <form th:method="PATCH" th:action="@{/people/{id}(id=${person.getId()})}" th:object="${person}">
-    <label for="name">Введите имя: </label>
+    <label for="name">Введите ФИО: </label>
     <input type="text" th:field="*{name}" id="name"/>
     <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</div>
     <br/>
-    <label for="age">Введите возраст: </label>
-    <input type="text" th:field="*{age}" id="age"/>
-    <div style="color:red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age Error</div>
+    <label for="yearOfBirth">Введите год рождения: </label>
+    <input type="text" th:field="*{yearOfBirth}" id="yearOfBirth"/>
+    <div style="color:red" th:if="${#fields.hasErrors('yearOfBirth')}" th:errors="*{yearOfBirth}">YearOfBirth Error</div>
     <br/>
     <label for="email">Введите email: </label>
     <input type="text" th:field="*{email}" id="email"/>

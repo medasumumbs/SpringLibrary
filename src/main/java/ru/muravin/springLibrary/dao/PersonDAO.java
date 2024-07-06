@@ -42,14 +42,14 @@ public class PersonDAO {
     }
 
     public void save(Person person) {
-        jdbcTemplate.update("Insert into public.\"Person\"  (name,age,email) values " +
-                "(?,?,?)", person.getName(),person.getAge(),person.getEmail());
+        jdbcTemplate.update("Insert into public.\"Person\"  (name,yearOfBirth,email) values " +
+                "(?,?,?)", person.getName(),person.getYearOfBirth(),person.getEmail());
     }
 
     public void update(int id, Person updatedPerson) {
         jdbcTemplate.update(
-                "update public.\"Person\" set name=?, age=?, email=? where id=?",
-                updatedPerson.getName(), updatedPerson.getAge(), updatedPerson.getEmail(),id);
+                "update public.\"Person\" set name=?, yearOfBirth=?, email=? where id=?",
+                updatedPerson.getName(), updatedPerson.getYearOfBirth(), updatedPerson.getEmail(),id);
     }
 
     public void delete(int id) {
