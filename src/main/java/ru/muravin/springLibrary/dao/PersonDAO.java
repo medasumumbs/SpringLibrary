@@ -43,7 +43,7 @@ public class PersonDAO {
 
     public void save(Person person) {
         jdbcTemplate.update("Insert into public.\"Person\"  (name,age,email) values " +
-                "(?,?,?,?)", person.getName(),person.getAge(),person.getEmail());
+                "(?,?,?)", person.getName(),person.getAge(),person.getEmail());
     }
 
     public void update(int id, Person updatedPerson) {
