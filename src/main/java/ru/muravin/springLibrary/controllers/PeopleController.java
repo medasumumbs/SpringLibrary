@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.muravin.springLibrary.dao.BookDAO;
 import ru.muravin.springLibrary.dao.PersonDAO;
 import ru.muravin.springLibrary.models.Person;
+import ru.muravin.springLibrary.utils.PersonValidator;
 
 import javax.validation.Valid;
 
@@ -18,14 +19,16 @@ import javax.validation.Valid;
 @RequestMapping("/people")
 public class PeopleController {
 
+    private final PersonValidator personValidator;
     private final PersonDAO personDAO;
 
     private final BookDAO bookDAO;
 
     @Autowired
-    public PeopleController(PersonDAO personDAO, BookDAO bookDAO) {
+    public PeopleController(PersonDAO personDAO, BookDAO bookDAO, PersonValidator personValidator) {
         this.personDAO = personDAO;
         this.bookDAO = bookDAO;
+        this.personValidator = personValidator;
     }
 
     @GetMapping()
@@ -49,6 +52,7 @@ public class PeopleController {
     @PostMapping()
     public String create(@ModelAttribute("person") @Valid Person person,
                          BindingResult bindingResult) {
+        personValidator.validate(person, bindingResult);
         if (bindingResult.hasErrors())
             return "people/new";
 

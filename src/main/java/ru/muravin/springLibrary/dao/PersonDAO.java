@@ -57,4 +57,9 @@ public class PersonDAO {
 
     }
 
+    public Optional<Object> getPersonByName(String name) {
+        return Optional.ofNullable(jdbcTemplate.query("select * from public.\"Person\" where name = ?",
+                new Object[]{name},
+                new BeanPropertyRowMapper<>(Person.class)).stream().findAny().orElse(null));
+    }
 }
