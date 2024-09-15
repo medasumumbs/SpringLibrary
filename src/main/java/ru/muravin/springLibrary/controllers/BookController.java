@@ -80,19 +80,20 @@ public class BookController {
         return "redirect:/books";
     }
     @PatchMapping("/{id}/setPerson")
-    public String setPerson(@ModelAttribute("book") @Valid Book book, BindingResult bindingResult,
-                         @ModelAttribute("person") Person person,
+    public String setPerson(@ModelAttribute("person") Person person,
                          @PathVariable("id") int id) {
-        book.setPerson(person);
-        bookService.save(book);
+
+        Book bookFromBase = bookService.findOne(id);
+        bookFromBase.setPerson(person);
+        bookService.save(bookFromBase);
         return "redirect:/books";
     }
     @PatchMapping("/{id}/free")
-    public String setPersonNull(@ModelAttribute("book") @Valid Book book, BindingResult bindingResult,
-                            @ModelAttribute("person") Person person,
+    public String setPersonNull(@ModelAttribute("person") Person person,
                             @PathVariable("id") int id) {
-        book.setPerson(null);
-        bookService.save(book);
+        Book bookFromBase = bookService.findOne(id);
+        bookFromBase.setPerson(null);
+        bookService.save(bookFromBase);
         return "redirect:/books";
     }
 

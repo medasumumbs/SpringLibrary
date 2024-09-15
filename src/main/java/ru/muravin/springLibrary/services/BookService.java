@@ -30,9 +30,10 @@ public class BookService {
         return booksRepository.findByPerson(person);
     }
     @Transactional
-    public void save(Book person) {
+    public void save(Book book) {
+
         //person.setCreatedAt(new Date());
-        booksRepository.save(person);
+        booksRepository.save(book);
     }
     @Transactional
     public void update(int id, Book updatedBook) {
