@@ -1,21 +1,33 @@
 package ru.muravin.springLibrary.models;
 
+import javax.persistence.*;
 import javax.validation.constraints.*;
 
+@Entity
+@Table(name = "book")
 public class Book {
 
+    @ManyToOne
+    @JoinColumn(name = "person_id", referencedColumnName = "id")
     private Person person;
 
+    @Transient
     private Integer person_id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
 
+    @Column(name = "name")
     @NotEmpty(message = "Название не должно быть пустым")
     @Size(min = 2, message = "ФИО должно занимать не менее 2 символов")
     private String name;
 
+    @Column(name = "year_of_creation")
     @NotNull(message = "Год создания книги не должен быть пустым")
     private int yearOfCreation;
 
+    @Column(name = "author_name")
     @NotEmpty(message = "Имя автора не может быть пустым")
     @Size(min = 2, message = "Имя автора должно состоять из нескольких символов")
     private String authorName;
