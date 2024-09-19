@@ -1,6 +1,7 @@
 package ru.muravin.springLibrary.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -32,8 +33,13 @@ public class BookController {
     }
 
     @GetMapping()
-    public String index(Model model) {
-        model.addAttribute("books", bookService.findAll());
+    public String index(Model model, @RequestParam(value = "page", required = false) Integer page,
+                        @RequestParam(value = "books_per_page", required = false) Integer booksPerPage) {
+        if ((page != null) && (booksPerPage != null)) {
+            model.addAttribute("books", bookService.findAll(PageRequest.of(page, booksPerPage)));
+        } else {
+            model.addAttribute("books", bookService.findAll());
+        }
         return "books/index";
     }
 
