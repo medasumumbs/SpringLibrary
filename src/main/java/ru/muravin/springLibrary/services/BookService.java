@@ -2,6 +2,7 @@ package ru.muravin.springLibrary.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.muravin.springLibrary.models.Book;
@@ -22,6 +23,9 @@ public class BookService {
 
     public List<Book> findAll(Pageable pageable) {
         return booksRepository.findAll(pageable).toList();
+    }
+    public List<Book> findAll(Sort sort) {
+        return booksRepository.findAll(sort);
     }
     public List<Book> findAll() {
         return booksRepository.findAll();
