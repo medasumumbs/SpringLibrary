@@ -14,6 +14,7 @@
 <p th:if="${not #lists.isEmpty(booksList)}"> Этот человек взял следующие книги:</p>
 <div th:if="${not #lists.isEmpty(booksList)}" th:each="book : ${booksList}">
     <a th:href="@{/books/{id}(id=${book.getId()})}"
+       th:style="${book.isOverdue()}?'color:red'"
        th:text="${book.getName() + ', ' + book.getAuthorName() + ', ' + book.getYearOfCreation()}">book</a><br/>
 </div>
 

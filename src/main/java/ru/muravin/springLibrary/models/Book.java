@@ -8,6 +8,7 @@ import java.util.Date;
 @Table(name = "book")
 public class Book {
 
+    private static final int OVERDUE_DAYS_LIMIT = 10;
     @ManyToOne
     @JoinColumn(name = "person_id", referencedColumnName = "id")
     private Person person;
@@ -35,6 +36,15 @@ public class Book {
 
     @Column(name="issued_date_time")
     private Date issuedDateTime;
+
+    /// Просрочен ли возврат книги
+    public Boolean isOverdue() {
+        if (issuedDateTime == null) return false;
+        if ((new Date().getTime() - issuedDateTime.getTime()) > OVERDUE_DAYS_LIMIT * 24 * 3600*1000) {
+            return true;
+        }
+        return false;
+    }
 
     public Book() {
 
