@@ -15,6 +15,10 @@
   <div th:if="${not #lists.isEmpty(books)}" th:each="book : ${books}">
     <a th:href="@{/books/{id}(id=${book.getId()})}"
        th:text="${book.getName() + ', ' + book.getAuthorName() + ', ' + book.getYearOfCreation()}">book</a>
+    <div th:if="${book.getPerson()!=null}">
+      <p th:text="${'Книга сейчас у ' + book.getPerson().getName()}"></p>
+    </div>
+    <p th:if="${book.getPerson()==null}" th:text="${'Книга свободна'}"></p>
   </div>
 </div>
 <br/>
