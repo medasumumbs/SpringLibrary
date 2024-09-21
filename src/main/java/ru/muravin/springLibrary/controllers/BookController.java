@@ -114,16 +114,14 @@ public class BookController {
                          @PathVariable("id") int id) {
 
         Book bookFromBase = bookService.findOne(id);
-        bookFromBase.setPerson(person);
-        bookService.save(bookFromBase);
+        bookService.setPerson(bookFromBase, person);
         return "redirect:/books";
     }
     @PatchMapping("/{id}/free")
     public String setPersonNull(@ModelAttribute("person") Person person,
                             @PathVariable("id") int id) {
         Book bookFromBase = bookService.findOne(id);
-        bookFromBase.setPerson(null);
-        bookService.save(bookFromBase);
+        bookService.setPerson(bookFromBase, null);
         return "redirect:/books";
     }
 

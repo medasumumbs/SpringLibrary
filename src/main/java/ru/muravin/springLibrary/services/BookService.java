@@ -9,6 +9,7 @@ import ru.muravin.springLibrary.models.Book;
 import ru.muravin.springLibrary.models.Person;
 import ru.muravin.springLibrary.repositories.BooksRepository;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,8 +44,16 @@ public class BookService {
     }
     @Transactional
     public void save(Book book) {
-
-        //person.setCreatedAt(new Date());
+        booksRepository.save(book);
+    }
+    @Transactional
+    public void setPerson(Book book, Person person) {
+        book.setPerson(person);
+        if (person != null) {
+            book.setIssuedDateTime(new Date());
+        } else {
+            book.setIssuedDateTime(null);
+        }
         booksRepository.save(book);
     }
     @Transactional

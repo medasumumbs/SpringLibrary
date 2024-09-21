@@ -2,6 +2,7 @@ package ru.muravin.springLibrary.models;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "book")
@@ -31,6 +32,9 @@ public class Book {
     @NotEmpty(message = "Имя автора не может быть пустым")
     @Size(min = 2, message = "Имя автора должно состоять из нескольких символов")
     private String authorName;
+
+    @Column(name="issued_date_time")
+    private Date issuedDateTime;
 
     public Book() {
 
@@ -90,5 +94,13 @@ public class Book {
 
     public void setPerson_id(Integer person_id) {
         this.person_id = person_id;
+    }
+
+    public Date getIssuedDateTime() {
+        return issuedDateTime;
+    }
+
+    public void setIssuedDateTime(Date issuedDateTime) {
+        this.issuedDateTime = issuedDateTime;
     }
 }
